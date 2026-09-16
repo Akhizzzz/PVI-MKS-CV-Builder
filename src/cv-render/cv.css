@@ -1,0 +1,233 @@
+/* Visual language for the CV document itself. Every colour reference goes
+   through the --cv-* custom properties set by CVRenderer, so switching
+   themes never requires touching this file. */
+
+.cv-document {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12mm;
+  font-family: var(--cv-font);
+  color: var(--cv-text);
+  /* Ask the browser to preserve exact background colours when printing.
+     Most browsers additionally require the print dialog's own "Background
+     graphics" option to be turned on — see PrintView.tsx's instruction. */
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  color-adjust: exact;
+}
+
+.cv-page {
+  width: 210mm;
+  min-height: 297mm;
+  box-sizing: border-box;
+  padding: 12mm;
+  background: var(--cv-primary);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  color-adjust: exact;
+}
+
+.cv-header {
+  display: flex;
+  align-items: center;
+  gap: 6mm;
+  break-after: avoid;
+}
+
+.cv-photo-frame {
+  width: 26mm;
+  height: 26mm;
+  border-radius: 50%;
+  border: 2px solid var(--cv-accent);
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.cv-photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cv-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.08) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+.cv-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.cv-full-name {
+  margin: 0;
+  font-size: var(--cv-fs-name);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  word-break: break-word;
+}
+
+.cv-title {
+  margin: 1mm 0 0;
+  font-size: var(--cv-fs-subheading);
+  color: var(--cv-text-secondary);
+}
+
+.cv-contact-bar {
+  margin-top: 4mm;
+  padding-bottom: 3mm;
+  border-bottom: 0.6mm solid var(--cv-accent);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2mm 6mm;
+  font-size: var(--cv-fs-small);
+  color: var(--cv-text-secondary);
+  break-after: avoid;
+}
+
+.cv-body {
+  margin-top: 6mm;
+  display: grid;
+  grid-template-columns: 33% 1fr;
+  gap: 6mm;
+  flex: 1;
+}
+
+.cv-col-left,
+.cv-col-right {
+  min-width: 0;
+}
+
+.cv-col-divider {
+  display: none;
+}
+
+.cv-body::after {
+  content: none;
+}
+
+/* Vertical rule between columns, implemented as a left-column border so it
+   only spans the actual content height rather than the whole page. */
+.cv-col-left {
+  border-right: 0.5mm solid var(--cv-accent);
+  padding-right: 5mm;
+}
+
+.cv-section {
+  break-inside: avoid;
+  margin-bottom: 5mm;
+}
+
+.cv-heading {
+  margin: 0 0 2.5mm;
+  font-size: var(--cv-fs-heading);
+  font-weight: 700;
+  break-after: avoid;
+}
+
+.cv-subheading {
+  margin: 0 0 1.5mm;
+  font-size: var(--cv-fs-subheading);
+  font-weight: 600;
+  color: var(--cv-accent);
+}
+
+.cv-profile-text {
+  margin: 0;
+  font-size: var(--cv-fs-body);
+  line-height: 1.45;
+  color: var(--cv-text-secondary);
+  white-space: pre-wrap;
+}
+
+.cv-skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3mm;
+}
+
+.cv-bullet-list {
+  margin: 0;
+  padding-left: 4mm;
+  font-size: var(--cv-fs-body);
+  line-height: 1.5;
+  color: var(--cv-text-secondary);
+}
+
+.cv-bullet-list li {
+  margin-bottom: 0.8mm;
+}
+
+.cv-language-list li {
+  list-style: none;
+  margin-left: -4mm;
+  display: flex;
+  justify-content: space-between;
+  gap: 2mm;
+}
+
+.cv-entry-line {
+  list-style: none;
+  margin-left: -4mm;
+}
+
+.cv-entry-line-title {
+  font-weight: 600;
+  color: var(--cv-text);
+}
+
+.cv-entry-line-meta {
+  color: var(--cv-text-secondary);
+}
+
+.cv-continuation {
+  break-inside: avoid;
+}
+
+.cv-divider {
+  border: none;
+  border-top: 0.4mm solid var(--cv-accent);
+  margin: 3mm 0;
+}
+
+.cv-entry {
+  break-inside: avoid;
+  margin-bottom: 4mm;
+}
+
+.cv-entry-title {
+  margin: 0;
+  font-size: var(--cv-fs-subheading);
+  font-weight: 700;
+  break-after: avoid;
+}
+
+.cv-entry-title-italic {
+  font-style: italic;
+}
+
+.cv-entry-dates {
+  font-weight: 400;
+  color: var(--cv-text-secondary);
+  font-size: var(--cv-fs-small);
+}
+
+.cv-entry-org {
+  margin: 0.5mm 0 1.5mm;
+  font-size: var(--cv-fs-small);
+  font-style: italic;
+  color: var(--cv-text-secondary);
+}

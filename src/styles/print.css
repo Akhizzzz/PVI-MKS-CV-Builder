@@ -1,0 +1,35 @@
+/* Print-only styling. Applies exclusively when printing / exporting to PDF
+   (the "Download PDF" action opens a dedicated print route that renders
+   nothing but the CV document, so this mostly just governs page geometry). */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .cv-document {
+    gap: 0;
+  }
+
+  .cv-page {
+    box-shadow: none;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .cv-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+}

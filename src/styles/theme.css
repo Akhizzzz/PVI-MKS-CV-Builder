@@ -1,0 +1,21 @@
+/* CV document theme + typography tokens.
+   --cv-primary/accent/text/text-secondary are overridden inline per-CV
+   (see ThemeSelector / CVRenderer) — these are fallback defaults only. */
+:root {
+  --cv-primary: #12468a;
+  --cv-accent: #f7df7c;
+  --cv-text: #ffffff;
+  --cv-text-secondary: #e7edf5;
+
+  /* Typography floor: the renderer never shrinks below these to fit content. */
+  --cv-fs-name: 26px;
+  --cv-fs-heading: 16px;
+  --cv-fs-subheading: 13.5px;
+  --cv-fs-body: 12.5px;
+  --cv-fs-small: 11px;
+
+  --cv-font: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Arial, sans-serif;
+
+  --cv-page-width-mm: 210;
+  --cv-page-height-mm: 297;
+}
