@@ -2,6 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { db } from './db';
 import type { CV } from '../data/cvModel';
 import { summarizeCV } from '../data/cvModel';
+import { normalizeCV } from '../data/migrate';
 import type { StorageService } from './StorageService';
 
 export const indexedDbStorage: StorageService = {
@@ -11,7 +12,8 @@ export const indexedDbStorage: StorageService = {
   },
 
   async getCV(id) {
-    return db.cvs.get(id);
+    const cv = await db.cvs.get(id);
+    return cv ? normalizeCV(cv) : undefined;
   },
 
   async saveCV(cv) {
@@ -39,7 +41,7 @@ export const indexedDbStorage: StorageService = {
     }
     const now = Date.now();
     const copy: CV = {
-      ...source,
+      ...normalizeCV(source),
       id: uuid(),
       name: `${source.name} (Copy)`,
       createdAt: now,

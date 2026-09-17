@@ -1,6 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import type { CV, ThemeId } from '../data/cvModel';
 import { indexedDbStorage } from './indexedDbStorage';
+import { normalizeCV } from '../data/migrate';
 
 const BACKUP_SCHEMA_VERSION = 1;
 const MAX_BACKUP_BYTES = 25 * 1024 * 1024; // 25MB sanity ceiling
@@ -123,7 +124,7 @@ export async function importBackup(file: File): Promise<CV> {
 
   const now = Date.now();
   const importedCV: CV = {
-    ...envelope.cv,
+    ...normalizeCV(envelope.cv),
     id: uuid(),
     name: envelope.cv.name,
     createdAt: now,

@@ -20,6 +20,13 @@ export interface PhotoCropRect {
   zoom: number;
 }
 
+export interface ProfileDraft {
+  whoAreYou: string;
+  goodAt: string;
+  workEnjoy: string;
+  fieldAiming: string;
+}
+
 export interface PersonalDetails {
   fullName: string;
   professionalTitle: string;
@@ -45,6 +52,8 @@ export interface ProjectEntry {
   startDate: string;
   endDate: string;
   bullets: string[];
+  /** Rough, unpolished notes the user wrote before AI turned them into bullets. */
+  roughNotes?: string;
 }
 
 export interface WorkExperienceEntry {
@@ -54,7 +63,10 @@ export interface WorkExperienceEntry {
   startDate: string;
   endDate: string;
   bullets: string[];
+  roughNotes?: string;
 }
+
+export type EducationType = 'higher' | 'pvi' | 'school' | 'other';
 
 export interface EducationEntry {
   id: string;
@@ -63,6 +75,8 @@ export interface EducationEntry {
   startYear: string;
   endYear: string;
   points: string[];
+  educationType?: EducationType;
+  roughNotes?: string;
 }
 
 export interface CertificationEntry {
@@ -89,6 +103,9 @@ export interface CV {
 
   personalDetails: PersonalDetails;
   profile: string;
+  /** The four guided-question answers behind the AI-generated profile, kept
+   * so the professional can revise them and regenerate later. */
+  profileDraft?: ProfileDraft;
 
   technicalSkills: string[];
   workplaceSkills: string[];

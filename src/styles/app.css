@@ -822,6 +822,56 @@ button:disabled {
   overflow: auto;
 }
 
+/* AI writing assistance */
+
+.ai-enhance {
+  margin: -0.5rem 0 1.25rem;
+}
+
+.ai-enhance-button {
+  background: #fff;
+  border: 1.5px solid var(--app-primary);
+  color: var(--app-primary);
+  border-radius: 8px;
+  padding: 0.55rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+}
+.ai-enhance-button:hover:not(:disabled) {
+  background: #eef4fc;
+}
+
+.ai-enhance-button-small {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  min-height: 40px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.ai-enhance-error {
+  color: var(--app-danger);
+  background: var(--app-danger-bg);
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+}
+
+.undo-ai-link {
+  display: inline-block;
+  background: none;
+  border: none;
+  color: var(--app-primary);
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.3rem 0;
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+}
+
 /* Responsive */
 
 @media (max-width: 1150px) {
