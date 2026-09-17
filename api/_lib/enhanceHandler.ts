@@ -18,10 +18,16 @@ function isSectionType(value: unknown): value is AISectionType {
   return typeof value === 'string' && (AI_SECTION_TYPES as string[]).includes(value);
 }
 
+type WhitelistResult = { ok: true; value: Record<string, string> } | { ok: false; message: string };
+
+function isWhitelistFailure(result: WhitelistResult): result is { ok: false; message: string } {
+  return result.ok === false;
+}
+
 /** Keeps only the fields this section is allowed to send, and enforces
  * per-field length limits — protects against both accidental over-sharing
  * from the client and pasted-in essays inflating request cost (brief §10, §24). */
-function whitelistAndValidate(sectionType: AISectionType, data: unknown): { ok: true; value: Record<string, string> } | { ok: false; message: string } {
+function whitelistAndValidate(sectionType: AISectionType, data: unknown): WhitelistResult {
   if (typeof data !== 'object' || data === null) {
     return { ok: false, message: 'No information was provided to improve.' };
   }
@@ -64,7 +70,7 @@ export async function handleEnhanceRequest(payload: unknown): Promise<EnhanceRes
   }
 
   const whitelisted = whitelistAndValidate(sectionType, data);
-  if (!whitelisted.ok) {
+  if (isWhitelistFailure(whitelisted)) {
     return fail(400, whitelisted.message);
   }
 
